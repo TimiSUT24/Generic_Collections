@@ -6,57 +6,35 @@ namespace Generic_Collections
         static void Main(string[] args)
         {
             Restaurant restaurant = new Restaurant();
-
-            //Menu list so we can create new items. 
-            List<MenuItem> menu = new List<MenuItem>()
-            {
-                new MenuItem(1,"Spaghetti och köttbullar",75),
-                new MenuItem(2,"Kebab pizza",100),
-                new MenuItem(3,"Kyckling spets 8st",65),
-                new MenuItem(4,"250g Hamburgare",105)
-            };
-
-            //Loops through the menu and adds the items to the Main menu. 
-            foreach (var item in menu)
-            {
-                restaurant.AddToMenu(item);
-            }
-
+            
+            //Create new menuItems and adds to menu
+            var menuItem1 = new MenuItem(1, "Spaghetti och köttbullar", 75);
+            restaurant.AddToMenu(menuItem1);
+         
+            var menuItem2 = new MenuItem(2, "Kebab pizza", 100);
+            restaurant.AddToMenu(menuItem2);
+           
+            var menuItem3 = new MenuItem(3, "Kyckling spets", 65);
+            restaurant.AddToMenu(menuItem3);
+            
+            var menuItem4 = new MenuItem(4, "250g Hamburgare", 105);
+            restaurant.AddToMenu(menuItem4);
+            
+            //Shows menu
             Console.WriteLine("------------------------------------------");
             restaurant.ShowMenu();
             Console.WriteLine("------------------------------------------");
-         
-            //Creates new lists that uses MenuItem objects and takes items from the menu list so we can create new orders. 
-            List<MenuItem> order1 = new List<MenuItem>()
-            {
-                new MenuItem(1, $"1 st {menu[0].Name}\n1 st {menu[1].Name}", menu[0].Price + menu[1].Price)
-            };
 
-            List<MenuItem> order2 = new List<MenuItem>()
-            {
-                new MenuItem(2, $"1 st {menu[3].Name}\n1 st {menu[1].Name}", menu[3].Price + menu[1].Price)
-            };
-
-            List<MenuItem> order3 = new List<MenuItem>()
-            {
-                new MenuItem(3, $"1 st {menu[2].Name}\n1 st {menu[0].Name}", menu[2].Price + menu[0].Price)
-            };
-
-            List<MenuItem> order4 = new List<MenuItem>()
-            {
-                new MenuItem(4, $"1 st {menu[0].Name}", menu[0].Price)
-            };
-
-            //Create new objects from Order class and creates new lists that uses MenuItem class objects and set a tablenumber value. 
-            Order addOrder1 = new Order(new List<MenuItem>(order1), 15);
-            Order addOrder2 = new Order(new List<MenuItem>(order2), 40);
-            Order addOrder3 = new Order(new List<MenuItem>(order3), 8);
-            Order addOrder4 = new Order(new List<MenuItem>(order4), 4);
+            //Create new orders using order class and adds the menuitems and tablenumber
+            Order newOrder1 = new Order(new List<MenuItem> { menuItem1,menuItem3,menuItem2 }, 15);
+            Order newOrder2 = new Order(new List<MenuItem> { menuItem2,menuItem3 }, 40);
+            Order newOrder3 = new Order(new List<MenuItem> { menuItem3,menuItem1 }, 8);
+            Order newOrder4 = new Order(new List<MenuItem> { menuItem4,menuItem4 }, 4);
 
             //Adds orders in the Orders list.         
-            restaurant.CreateOrder(addOrder1);
-            restaurant.CreateOrder(addOrder2);
-            restaurant.CreateOrder(addOrder3);
+            restaurant.CreateOrder(newOrder1);
+            restaurant.CreateOrder(newOrder2);
+            restaurant.CreateOrder(newOrder3);
             Console.WriteLine("------------------------------------------");
 
             //Shows all orders.
@@ -67,12 +45,13 @@ namespace Generic_Collections
 
             restaurant.ShowOrderCount(); //Shows how many orders that exists.
             restaurant.ShowNextOrder(); //Shows first order. 
+            Console.WriteLine("");
             restaurant.HandleOrder();   //Removes the first order in the line.
             restaurant.ShowOrderCount(); 
             Console.WriteLine("------------------------------------------");
 
 
-            restaurant.CreateOrder(addOrder4); //Creates new order. 
+            restaurant.CreateOrder(newOrder4); //Creates new order. 
             Console.WriteLine(); 
             restaurant.ShowOrderCount();
             restaurant.HandleOrder();
@@ -82,6 +61,7 @@ namespace Generic_Collections
 
 
             restaurant.ShowNextOrder();
+            Console.WriteLine("");
             restaurant.HandleOrder();
             restaurant.ShowOrderCount(); 
 

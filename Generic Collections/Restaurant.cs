@@ -8,13 +8,14 @@
 
         //Adds items to Menu
         public void AddToMenu(MenuItem menuItem)
-        {
+        {          
             Menu.Add(menuItem);
-            Console.WriteLine($"{menuItem.Name} har lagts till i menyn.");
+            Console.WriteLine($"{menuItem.Name} har lagts till i menyn.");            
         }
         //Shows the whole menu. 
         public void ShowMenu()
         {
+            Console.WriteLine("Meny:");
             foreach (MenuItem item in Menu)
             {
                 Console.WriteLine($"{item.Id}. {item.Name} - {item.Price:C}");
@@ -37,7 +38,7 @@
         {
             foreach (var order in Orders)
             {
-                order.ShowOrder();
+                Console.WriteLine(order + "\n");
             }
         }
         //Shows the next order in the queue 
@@ -46,7 +47,7 @@
             if(Orders.Count > 0)
             {
                 Console.WriteLine("Nästa order i kön:");
-                Orders.Peek().ShowOrder(); 
+                Console.WriteLine(Orders.Peek()); 
             }         
         }
         //Shows how many orders there are and if there are none left. 

@@ -27,16 +27,19 @@
             orderIdCounter++;
             _orderItems = orderItems;
             _tableNumber = tableNumber;
-        }
-        //Can use this to show one or multiple orders. 
-        public void ShowOrder()
+        }     
+        //loops through _orderItems and returns the whole order 
+        public override string ToString()
         {
-            Console.WriteLine($"Order {_orderId}:");
-            foreach (var order in OrderItems)
+            string items = "";
+            decimal totalCost = 0;
+            foreach (var item in _orderItems)
             {
-                Console.WriteLine($"{order.Name}\nSumma: {order.Price:C}\nTill bord nummer {_tableNumber}\n");
+                items += $"1 st {item.Name}\n";
+                totalCost += item.Price;
             }
+            return $"Order {OrderId}:\n{items}Summa: {totalCost:F2} kr\nTill bord nummer {_tableNumber}";
         }
-        
+
     }
 }
